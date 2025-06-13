@@ -72,11 +72,12 @@ To access the server from my local terminal using SSH:
 
 4. I then connected securely using the terminal
 
-    `chmod 400 "lnd-key.pem"`
-    `ssh -i "lnd-key.pem" ubuntu@ec2-3-8-225-151.eu.west-2.compute.amazonaws.com`
+    ```bash
+    chmod 400 "lnd-key.pem"
+    ssh -i "lnd-key.pem" ubuntu@ec2-3-8-225-151.eu.west-2.compute.amazonaws.com
 
 5. I was greeted with this page
 
-![SSH'd into EC2 Server on Local Machine](assets/cloud1.jpg)
+![SSH'd into EC2 Server on Local Machine](assets/cloud1.JPG)
 ---
 
