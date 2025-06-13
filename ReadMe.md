@@ -1,4 +1,4 @@
-# 🧱 Step 1: Provisioning the Linux Server
+# 🧱 1: Provisioning the Linux Server
 
 To begin this project, I provisioned a cloud-based Linux server using **Amazon EC2 (Elastic Compute Cloud)**. This gave me a secure, scalable environment to host and serve my dynamic landing page.
 
@@ -31,7 +31,6 @@ I logged into the Amazon Management Console (AWS) and performed the following st
 
 8. **Launched the instance** and set it to `running`
 
----
 
 ## ✅ 1.2 Configured the network settings (Security Group)
 
@@ -42,7 +41,6 @@ Opened the altschool-cloud EC2 instance ID, scrolled down and navigated to secur
      - HTTP (Port 80) — open to all (0.0.0.0/0)
      - HTTPS (Port 443) — open to all (0.0.0.0/0)
 
----
 
 ## 🌐 1.3 Allocating and Associating an Elastic IP
 
@@ -56,7 +54,6 @@ To ensure the server retains a consistent public IP address even after reboots, 
 📝 My server’s permanent public IP is:
 **`3.8.225.151`**
 
----
 
 ## 🛠️ 1.4 SSH Access via Termius
 
@@ -76,7 +73,7 @@ To access the server from my local terminal using SSH:
     chmod 400 "lnd-key.pem"
     ssh -i "lnd-key.pem" ubuntu@ec2-3-8-225-151.eu.west-2.compute.amazonaws.com
 
-5. I was greeted with this page
+5. I was greeted with the AWS EC2 cloud instance on my local machine showing the hostname (ubuntu), my private IP and the prompt (~).
 
 ![SSH'd into EC2 Server on Local Machine](assets/cloud1.JPG)
 ---
