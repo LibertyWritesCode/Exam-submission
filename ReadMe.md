@@ -92,7 +92,7 @@ After provisioning my EC2 instance in Step 1, I set up a production-ready web se
 After associating my **Elastic IP** to the instance, I opened:
 
 ```
-http://3.8.225.115
+http://3.8.225.151
 ```
 
 Since Nginx wasn't installed yet, nothing loaded. I proceeded to install it after updating the system.
@@ -128,7 +128,7 @@ sudo apt install curl git -y
 
 
 
-#### 🌐 2.3.1 Installing and Starting Nginx
+#### 🌐 2.3.1  Installing and Starting Nginx
 
 Now I installed **Nginx**:
 
@@ -143,7 +143,7 @@ sudo systemctl enable nginx
 sudo systemctl start nginx
 ```
 
-Visiting `http://3.8.225.115` now displayed the default **Nginx Welcome Page**, confirming that:
+Visiting `http://3.8.225.151` now displayed the default **Nginx Welcome Page**, confirming that:
 
 - Nginx is successfully installed  
 - The EC2 instance is publicly accessible  
@@ -151,7 +151,7 @@ Visiting `http://3.8.225.115` now displayed the default **Nginx Welcome Page**, 
 
 
 
-#### 💻 2.3.2 Installing Node.js and npm
+#### 💻 2.3.2  Installing Node.js and npm
 
 Next, I installed Node.js and npm:
 
@@ -233,7 +233,7 @@ node server.js
 ```
 
 Then visited `http://localhost:3000` (on the server) and saw the text:  
-**“Liberty's Alt School Exam Project”**.
+> **Liberty's Alt School Exam Project**.
 
 
 
@@ -280,10 +280,10 @@ sudo systemctl reload nginx
 At this point, visiting:
 
 ```
-http://3.8.225.115
+http://3.8.225.151
 ```
 
-no longer showed the Nginx welcome page. Instead, it loaded my custom HTML:
+Loaded my custom HTML without disruption:
 
 > **Liberty's Alt School Exam Project**
 
