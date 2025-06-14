@@ -436,8 +436,8 @@ sudo systemctl reload nginx
 
 I visited both:
 
-`[http://libertyf.mooo.com](http://libertyf.mooo.com)`
-`[https://libertyf.mooo.com](https://libertyf.mooo.com)`
+[http://libertyf.mooo.com](http://libertyf.mooo.com)
+[https://libertyf.mooo.com](https://libertyf.mooo.com)
 
 ✅ I Confirmed that the browser redirected to the HTTPS version and showed a valid SSL certificate.
 
@@ -446,7 +446,6 @@ I visited both:
 
 # 🌐 Public Access URLs
 
-> 🔗 Public IP: [https://3.8.225.151](https://3.8.225.151)
 > 🔗 HTTP: [http://libertyf.mooo.com](http://libertyf.mooo.com)
 > 🔗 HTTPS: [https://libertyf.mooo.com](https://libertyf.mooo.com)
   
