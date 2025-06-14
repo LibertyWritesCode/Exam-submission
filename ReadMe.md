@@ -364,7 +364,7 @@ sudo nginx -t
 sudo systemctl reload nginx
 ```
 
-> ⚠️ I made sure that the subdomain `libertyf.mooo.com` was pointing to my EC2 Elastic IP using a DNS A-record.
+> ⚠️ **I made sure that the subdomain `libertyf.mooo.com` was pointing to my EC2 Elastic IP using a DNS A-record.**
 
 
 
@@ -436,19 +436,23 @@ sudo systemctl reload nginx
 
 I visited both:
 
-- `http://libertyf.mooo.com`
-- `https://libertyf.mooo.com`
+`[http://libertyf.mooo.com](http://libertyf.mooo.com)`
+`[https://libertyf.mooo.com](https://libertyf.mooo.com)`
 
 ✅ I Confirmed that the browser redirected to the HTTPS version and showed a valid SSL certificate.
-
-✅ I Confirmed `http://3.8.225.151` still works but redirects to HTTPS if configured.
 
 ---
 
 
 # 🌐 Public Access URLs
 
-- 🔓 **HTTP**: `http://3.8.225.151`
-- 🔐 **HTTPS**: `https://libertyf.mooo.com`
+> 🔗 Public IP: [https://3.8.225.151](https://3.8.225.151)
+> 🔗 HTTP: [http://libertyf.mooo.com](http://libertyf.mooo.com)
+> 🔗 HTTPS: [https://libertyf.mooo.com](https://libertyf.mooo.com)
+  
+> 🖼️ Screenshot of rendered page:
+>
+> ![Rendered Page](screenshot.png)
+
 
 > 💡 At this point, my dynamic web app was **production-ready**, served securely over HTTPS using a free SSL certificate.
