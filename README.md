@@ -345,7 +345,7 @@ PM2 ensured my app survived reboots and stayed running in the background.
 
 # 3: Dynamic Landing Page
 
-After setting up the server and reverse proxy, I moved on to designing and deploying a **dynamic landing page** to demonstrate my skills and present my startup idea.
+After setting up the server and reverse proxy, I moved on to designing a **dynamic landing page** to demonstrate my skills and present my startup idea.
 
 This step included:
 - Creating an HTML page with **inline CSS styling** (no external libraries like Tailwind).
@@ -361,7 +361,7 @@ The `views/index.html` file was created manually with the following structure:
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -561,12 +561,12 @@ I visited both:
 > 🔗 HTTP: [http://libertyf.mooo.com](http://libertyf.mooo.com)
 > 🔗 HTTPS: [https://libertyf.mooo.com](https://libertyf.mooo.com)
   
-> 🖼️ Screenshot of rendered page:
+> 🖼️ **Screenshot of rendered page:**
 >
 > ![Rendered Page](assets/cloud3.JPG)
 > ![Rendered Page 2](assets/cloud4.JPG)
 
-> Browser showing secure connection of the site:
+> **Browser showing secure connection of the site:**
 >
 > ![Secure Connection](assets/cloud5.JPG)
 
