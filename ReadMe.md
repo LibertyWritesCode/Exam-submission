@@ -1,4 +1,4 @@
-# 🧱 1: Provisioning the Linux Server
+# 1: Provisioning the Linux Server
 
 To begin this project, I provisioned a cloud-based Linux server using **Amazon EC2 (Elastic Compute Cloud)**. This gave me a secure, scalable environment to host and serve my dynamic landing page.
 
@@ -38,7 +38,7 @@ I logged into the Amazon Management Console (AWS) and performed the following st
 Opened the altschool-cloud EC2 instance ID, scrolled down and navigated to security. I then clicked on **`Edit Inbound Rules`**
 
 - The inbound rules allow traffic for:
-     - SSH (Port 22) — restricted to my private IP
+     - SSH (Port 22) — restricted to my IP
      - HTTP (Port 80) — open to all (0.0.0.0/0)
      - HTTPS (Port 443) — open to all (0.0.0.0/0)
 
@@ -81,13 +81,13 @@ To access the server from my local terminal using SSH:
 ![SSH'd into EC2 Server on Local Machine](assets/cloud1.JPG)
 ---
 
-## 2: Web Server Setup (Nginx with Reverse Proxy for Node.js)
+# 2: Web Server Setup (Nginx with Reverse Proxy for Node.js)
 
 After provisioning my EC2 instance in Step 1, I set up a production-ready web server using **Nginx** and a **Node.js** application to serve my dynamic landing page.
 
 ---
 
-### 🌐 2.1 Confirming Server Reachability
+## 🌐 2.1 Confirming Server Reachability
 
 After associating my **Elastic IP** to the instance, I opened:
 
@@ -99,7 +99,7 @@ Since Nginx wasn't installed yet, nothing loaded. I proceeded to install it afte
 
 
 
-### 🔑 2.2 SSH into EC2 Server
+## 🔑 2.2 SSH into EC2 Server
 
 From my local machine (Termius), I had earlier created an `altschool` folder and moved my downloaded key pair (`lnd-key.pem`) into it.
 
@@ -112,7 +112,7 @@ Then I SSH’d into the EC2 instance using:
 
 
 
-### 🧰2.3 Updating and Installing Prerequisites
+## 🧰2.3 Updating and Installing Prerequisites
 
 I first updated and upgraded all system packages:
 
@@ -128,7 +128,7 @@ sudo apt install curl git -y
 
 
 
-#### 🌐 2.3.1  Installing and Starting Nginx
+### 🌐 2.3.1  Installing and Starting Nginx
 
 Now I installed **Nginx**:
 
@@ -151,7 +151,7 @@ Visiting `http://3.8.225.151` now displayed the default **Nginx Welcome Page**, 
 
 
 
-#### 💻 2.3.2  Installing Node.js and npm
+### 💻 2.3.2  Installing Node.js and npm
 
 Next, I installed Node.js and npm:
 
@@ -171,7 +171,7 @@ npm -v
 
 
 
-### 📁 2.4 Built Node.js Web App
+## 📁 2.4 Built Node.js Web App
 
 I created a directory for my app:
 
@@ -237,7 +237,7 @@ Then visited `http://localhost:3000` (on the server) and saw the text:
 
 
 
-### 🔀 2.5 Configuring Reverse Proxy with Nginx
+## 🔀 2.5 Configuring Reverse Proxy with Nginx
 
 Now that the Node.js app was working locally, I set up Nginx as a reverse proxy.
 
@@ -275,7 +275,7 @@ sudo systemctl reload nginx
 
 
 
-### ✅ 2.6 Accessing Custom App via Public IP
+## ✅ 2.6 Accessing Custom App via Public IP
 
 At this point, visiting:
 
@@ -289,9 +289,9 @@ Loaded my custom HTML without disruption:
 
 Which proved the reverse proxy was working and the landing page was being served successfully.
 
----
 
-### 🟢 2.7 Keeping App Running with PM2
+
+## 🟢 2.7 Keeping App Running with PM2
 
 To ensure the Node.js app runs even if the server restarts, I installed PM2 and set it up:
 
@@ -305,3 +305,150 @@ pm2 save
 PM2 ensured my app survived reboots and stayed running in the background.
 
 ---
+
+# 4: Networking & Security (Production-Ready)
+
+This step was focused on exposing the web server securely to the internet. It included confirming the configuration of security rules on AWS, ensuring HTTP and HTTPS access, and securing the site using Let's Encrypt SSL via **Certbot**.
+
+---
+
+## 🔓 4.1 Confirming Configuration of Security Group Rules (Allow HTTP & HTTPS)
+
+I returned to my EC2 instance's **Security Group** settings in the AWS Management Console and ensured the following **inbound rules** were still enabled:
+
+| Type        | Protocol | Port Range | Source         |
+|-------------|----------|------------|----------------|
+| SSH         | TCP      | 22         | My IP |
+| HTTP        | TCP      | 80         | 0.0.0.0/0      |
+| HTTPS       | TCP      | 443        | 0.0.0.0/0      |
+
+This allowed:
+
+- Secure shell access over **port 22**
+- Web traffic on **port 80 (HTTP)**
+- Encrypted traffic on **port 443 (HTTPS)**
+
+
+
+## 🛡️ 4.2 Securing the Site with SSL (Let’s Encrypt + Certbot)
+
+To encrypt traffic using HTTPS, I used **Certbot**, a tool that automatically provisions SSL certificates from **Let’s Encrypt**.
+
+### 4.2.1 Installing Certbot and Nginx Plugin
+
+```bash
+sudo apt update
+sudo apt install certbot python3-certbot-nginx -y
+```
+
+## 4.3 Configuring Nginx Server Block with Domain
+
+Before running Certbot, I updated my Nginx server block to use a **subdomain name from mooo.com domain**, not just an IP. The custom subdomain is `libertyf.mooo.com`
+
+I edited:
+
+```bash
+sudo nano /etc/nginx/sites-available/altschool-exam
+```
+
+And set:
+
+```nginx
+server_name libertyf.mooo.com;
+```
+
+Then tested and reloaded Nginx:
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+> ⚠️ I made sure that the subdomain `libertyf.mooo.com` was pointing to my EC2 Elastic IP using a DNS A-record.
+
+
+
+## 4.4 Requesting SSL Certificate
+
+I used Certbot to automatically generate and configure HTTPS for my domain:
+
+```bash
+sudo certbot --nginx -d libertyf.mooo.com
+```
+
+Certbot:
+
+- Verified the domain
+- Issued an SSL certificate
+- Auto-configured the Nginx config to redirect HTTP to HTTPS
+
+
+
+## 4.5 Automatic Renewal
+
+To ensure that the SSL certificate renews automatically, I tested the renewal process:
+
+```bash
+sudo certbot renew --dry-run
+```
+
+
+
+## 🔁 4.6  Redirected HTTP to HTTPS
+
+To enforce HTTPS manually, I updated the Nginx block:
+
+```nginx
+server {
+    listen 80;
+    server_name libertyf.mooo.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name libertyf.mooo.com;
+
+    ssl_certificate /etc/letsencrypt/live/libertyf.mooo.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/libertyf.mooo.com/privkey.pem;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+Reloaded Nginx after the changes:
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+
+
+## 🧪 4.7 Final Testing
+
+I visited both:
+
+- `http://libertyf.mooo.com`
+- `https://libertyf.mooo.com`
+
+✅ I Confirmed that the browser redirected to the HTTPS version and showed a valid SSL certificate.
+
+✅ I Confirmed `http://3.8.225.151` still works but redirects to HTTPS if configured.
+
+---
+
+
+# 🌐 Public Access URLs
+
+- 🔓 **HTTP**: `http://3.8.225.151`
+- 🔐 **HTTPS**: `https://libertyf.mooo.com`
+
+> 💡 At this point, my dynamic web app was **production-ready**, served securely over HTTPS using a free SSL certificate.
