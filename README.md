@@ -1,57 +1,37 @@
-<details> <summary><strong>📘 Table of Contents</strong></summary>
-1: Provisioning the Linux Server
+<details>
+<summary><strong> 📘 Table of Contents</strong></summary>
 
-1.1 Created an AWS EC2 Instance
+- [1: Provisioning the Linux Server](#1-provisioning-the-linux-server)  
+  - [1.1 Created an AWS EC2 Instance](#11-created-an-aws-ec2-instance)  
+  - [1.2 Configured the network settings (Security Group)](#12-configured-the-network-settings-security-group)  
+  - [1.3 Allocating and Associating an Elastic IP](#13-allocating-and-associating-an-elastic-ip)  
+  - [1.4 SSH Access via Termius](#14-ssh-access-via-termius)  
 
-1.2 Configured the network settings (Security Group)
+- [2: Web Server Setup (Nginx with Reverse Proxy for Node.js)](#2-web-server-setup-nginx-with-reverse-proxy-for-nodejs)  
+  - [2.1 Confirming Server Reachability](#21-confirming-server-reachability)  
+  - [2.2 SSH into EC2 Server](#22-ssh-into-ec2-server)  
+  - [2.3 Updating and Installing Prerequisites](#23-updating-and-installing-prerequisites)  
+    - [2.3.1 Installing and Starting Nginx](#231-installing-and-starting-nginx)  
+    - [2.3.2 Installing Node.js and npm](#232-installing-nodejs-and-npm)  
+  - [2.4 Built Node.js Web App](#24-built-nodejs-web-app)  
+  - [2.5 Configuring Reverse Proxy with Nginx](#25-configuring-reverse-proxy-with-nginx)  
+  - [2.6 Accessing Custom App via Public IP](#26-accessing-custom-app-via-public-ip)  
+  - [2.7 Keeping App Running with PM2](#27-keeping-app-running-with-pm2)  
 
-1.3 Allocating and Associating an Elastic IP
+- [3: Dynamic Landing Page](#3-dynamic-landing-page)  
+  - [3.1 My Landing Page Content](#31-my-landing-page-content)  
 
-1.4 SSH Access via Termius
+- [4: Networking & Security (Production-Ready)](#4-networking--security-production-ready)  
+  - [4.1 Confirming Configuration of Security Group Rules (Allow HTTP & HTTPS)](#41-confirming-configuration-of-security-group-rules-allow-http--https)  
+  - [4.2 Securing the Site with SSL (Let’s Encrypt + Certbot)](#42-securing-the-site-with-ssl-lets-encrypt--certbot)  
+    - [4.2.1 Installing Certbot and Nginx Plugin](#421-installing-certbot-and-nginx-plugin)  
+  - [4.3 Configuring Nginx Server Block with Domain](#43-configuring-nginx-server-block-with-domain)  
+  - [4.4 Requesting SSL Certificate](#44-requesting-ssl-certificate)  
+  - [4.5 Automatic Renewal](#45-automatic-renewal)  
+  - [4.6 Redirected HTTP to HTTPS](#46-redirected-http-to-https)  
+  - [4.7 Final Testing](#47-final-testing)  
 
-2: Web Server Setup (Nginx with Reverse Proxy for Node.js)
-
-2.1 Confirming Server Reachability
-
-2.2 SSH into EC2 Server
-
-2.3 Updating and Installing Prerequisites
-
-2.3.1 Installing and Starting Nginx
-
-2.3.2 Installing Node.js and npm
-
-2.4 Built Node.js Web App
-
-2.5 Configuring Reverse Proxy with Nginx
-
-2.6 Accessing Custom App via Public IP
-
-2.7 Keeping App Running with PM2
-
-3: Dynamic Landing Page
-
-3.1 My Landing Page Content
-
-4: Networking & Security (Production-Ready)
-
-4.1 Confirming Configuration of Security Group Rules (Allow HTTP & HTTPS)
-
-4.2 Securing the Site with SSL (Let’s Encrypt + Certbot)
-
-4.2.1 Installing Certbot and Nginx Plugin
-
-4.3 Configuring Nginx Server Block with Domain
-
-4.4 Requesting SSL Certificate
-
-4.5 Automatic Renewal
-
-4.6 Redirected HTTP to HTTPS
-
-4.7 Final Testing
-
-🌐 Public Access URLs
+- [🌐 Public Access URLs](#-public-access-urls)
 
 </details>
 
