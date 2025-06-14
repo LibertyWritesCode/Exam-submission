@@ -436,7 +436,7 @@ sudo systemctl reload nginx
 
 I visited both:
 
-[http://libertyf.mooo.com](http://libertyf.mooo.com)
+[http://libertyf.mooo.com](http://libertyf.mooo.com) and 
 [https://libertyf.mooo.com](https://libertyf.mooo.com)
 
 ✅ I Confirmed that the browser redirected to the HTTPS version and showed a valid SSL certificate.
