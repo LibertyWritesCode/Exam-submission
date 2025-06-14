@@ -1,3 +1,60 @@
+<details> <summary><strong>📘 Table of Contents</strong></summary>
+1: Provisioning the Linux Server
+
+1.1 Created an AWS EC2 Instance
+
+1.2 Configured the network settings (Security Group)
+
+1.3 Allocating and Associating an Elastic IP
+
+1.4 SSH Access via Termius
+
+2: Web Server Setup (Nginx with Reverse Proxy for Node.js)
+
+2.1 Confirming Server Reachability
+
+2.2 SSH into EC2 Server
+
+2.3 Updating and Installing Prerequisites
+
+2.3.1 Installing and Starting Nginx
+
+2.3.2 Installing Node.js and npm
+
+2.4 Built Node.js Web App
+
+2.5 Configuring Reverse Proxy with Nginx
+
+2.6 Accessing Custom App via Public IP
+
+2.7 Keeping App Running with PM2
+
+3: Dynamic Landing Page
+
+3.1 My Landing Page Content
+
+4: Networking & Security (Production-Ready)
+
+4.1 Confirming Configuration of Security Group Rules (Allow HTTP & HTTPS)
+
+4.2 Securing the Site with SSL (Let’s Encrypt + Certbot)
+
+4.2.1 Installing Certbot and Nginx Plugin
+
+4.3 Configuring Nginx Server Block with Domain
+
+4.4 Requesting SSL Certificate
+
+4.5 Automatic Renewal
+
+4.6 Redirected HTTP to HTTPS
+
+4.7 Final Testing
+
+🌐 Public Access URLs
+
+</details>
+
 # 1: Provisioning the Linux Server
 
 To begin this project, I provisioned a cloud-based Linux server using **Amazon EC2 (Elastic Compute Cloud)**. This gave me a secure, scalable environment to host and serve my dynamic landing page.
@@ -74,9 +131,9 @@ To access the server from my local terminal using SSH:
 
     ```bash
     chmod 400 "lnd-key.pem"
-    ssh -i "lnd-key.pem" ubuntu@ec2-3-8-225-151.eu.west-2.compute.amazonaws.com
+    ssh -i "lnd-key.pem" ubuntu@ec2-3-8-225-151.eu-west-2.compute.amazonaws.com
 
-5. I was greeted with the AWS EC2 cloud server on my local machine showing the hostname (ubuntu), my private IP and the prompt (~).
+5. I was greeted with the AWS EC2 cloud server on my local machine showing the hostname (ubuntu), my private IP and the prompt ($).
 
 ![SSH'd into EC2 Server on Local Machine](assets/cloud1.JPG)
 ---
@@ -107,7 +164,7 @@ Then I SSH’d into the EC2 instance using:
 
 ```bash
     chmod 400 "lnd-key.pem"
-    ssh -i "lnd-key.pem" ubuntu@ec2-3-8-225-151.eu.west-2.compute.amazonaws.com
+    ssh -i "lnd-key.pem" ubuntu@ec2-3-8-225-151.eu-west-2.compute.amazonaws.com
 ```
 
 
@@ -306,6 +363,81 @@ PM2 ensured my app survived reboots and stayed running in the background.
 
 ---
 
+# 3: Dynamic Landing Page
+
+After setting up the server and reverse proxy, I moved on to designing and deploying a **dynamic landing page** to demonstrate my skills and present my startup idea.
+
+This step included:
+- Creating an HTML page with **inline CSS styling** (no external libraries like Tailwind).
+- Making the page dynamic by showing the **current time**.
+- Including personalized details: name, role, pitch, and bio.
+- Updating the Node.js app to serve the new HTML content.
+
+
+
+## 📝 3.1 My Landing Page Content
+
+The `views/index.html` file was created manually with the following structure:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Future of Adaptive Energy Systems</title>
+</head>
+<body style="margin: 0; font-family: Arial, sans-serif; background: #dfe6eb; color: #000000;">
+
+  <div style="text-align: center; padding: 50px 20px;">
+    <h1 style="font-size: 48px; color: #2c3e50;">Liberty Fakolade</h1>
+    <h2 style="font-size: 24px; color: #16a085;">Lead Cloud & DevOps Engineer</h2>
+
+    <h3 style="margin-top: 40px; color:#000000; font-size: 32px;">� The Future of Adaptive Energy Systems</h3>
+    <p style="max-width: 600px; margin: 20px auto; font-size: 18px; color: #395611;">
+      We're rethinking how homes and cities consume energy by using predictive analytics and edge computing to create>    </p>
+
+    <p style="font-size: 16px; color: #3b541cd4;">
+      Our startup combines real-time data analysis and scalable infrastructure to solve one of today’s biggest sustai>    </p>
+
+    <hr style="margin: 40px auto; width: 60%; border-color: #ccc;" />
+
+    <div style="max-width: 600px; margin: auto;">
+      <h3>About Me</h3>
+      <p>
+        I’m a cloud engineer with background in computer science and experience building scalable systems on AWS and >        <br><br>
+        I'm currently a student at <strong>AltSchool Africa</strong>, specializing in developing and managing cloud i>      </p>
+    </div>
+
+     <p style="margin-top: 50px; font-size: 16px;" color: #16a085;>
+      Current Time: <span id="time" style="font-weight: bold;"></span>
+    </p>
+  </div>
+
+  <script>
+    const timeEl = document.getElementById('time');
+    const updateTime = () => {
+      const now = new Date();
+      timeEl.textContent = now.toLocaleTimeString();
+    };
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
+     <p style="text-align: center; font-size: 14px; color: #999; margin-top: 40px;">
+         &copy; 2025 Liberty Fakolade. All rights reserved.
+     </p>
+</body>
+</html>
+```
+
+I then reloaded the server to display the contents of my new landing page using:
+
+```bash
+pm2 restart server.js
+```
+
+---
+
 # 4: Networking & Security (Production-Ready)
 
 This step was focused on exposing the web server securely to the internet. It included confirming the configuration of security rules on AWS, ensuring HTTP and HTTPS access, and securing the site using Let's Encrypt SSL via **Certbot**.
@@ -451,7 +583,12 @@ I visited both:
   
 > 🖼️ Screenshot of rendered page:
 >
-> ![Rendered Page](screenshot.png)
+> ![Rendered Page](assets/cloud3.JPG)
+> ![Rendered Page 2](assets/cloud4.JPG)
+
+> Browser showing secure connection of the site:
+>
+> ![Secure Connection](assets/cloud5.JPG)
 
 
 > 💡 At this point, my dynamic web app was **production-ready**, served securely over HTTPS using a free SSL certificate.
