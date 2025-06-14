@@ -561,12 +561,12 @@ I visited both:
 > 🔗 HTTP: [http://libertyf.mooo.com](http://libertyf.mooo.com)
 > 🔗 HTTPS: [https://libertyf.mooo.com](https://libertyf.mooo.com)
   
-> 🖼️ **Screenshot of rendered page:**
+🖼️ **Screenshot of rendered page:**
 >
 > ![Rendered Page](assets/cloud3.JPG)
 > ![Rendered Page 2](assets/cloud4.JPG)
 
-> **Browser showing secure connection of the site:**
+**Browser showing secure connection of the site:**
 >
 > ![Secure Connection](assets/cloud5.JPG)
 
